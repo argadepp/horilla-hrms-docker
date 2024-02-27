@@ -1,0 +1,20 @@
+version: '3'
+
+services:
+  horilla:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+    environment:
+      - DATABASE_URL=postgres://hr:password@db:5432/hr
+
+  db:
+    image: postgres:latest
+    environment:
+      POSTGRES_DB: hr
+      POSTGRES_USER: hr
+      POSTGRES_PASSWORD: password
